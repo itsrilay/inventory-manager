@@ -27,4 +27,18 @@ module.exports = {
       categories: categories,
     });
   },
+
+  getCategoryDetails: (req, res) => {
+    const categoryId = req.params.categoryId;
+    const category = categories.find(
+      (category) => String(category.id) === categoryId
+    );
+
+    if (!category) res.render('404');
+
+    res.render('categoryDetails', {
+      title: 'Category Details',
+      category: category,
+    });
+  },
 };

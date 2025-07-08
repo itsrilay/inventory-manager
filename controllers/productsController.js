@@ -36,4 +36,18 @@ module.exports = {
   getProducts: (req, res) => {
     res.render('productList', { title: 'Product List', products: products });
   },
+
+  getProductDetails: (req, res) => {
+    const productId = req.params.productId;
+    const product = products.find(
+      (product) => String(product.id) === productId
+    );
+
+    if (!product) res.render('404');
+
+    res.render('productDetails', {
+      title: 'Product Details',
+      product: product,
+    });
+  },
 };
