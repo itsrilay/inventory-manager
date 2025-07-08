@@ -1,0 +1,11 @@
+<div>
+  <h3><%= product.name %></h3>
+  <p><%= product.description %></p>
+  <p><%= product.price.toFixed(2) %>€</p>
+  <p><%= product.stockQuantity %></p>
+  <% if(product.isActive) { %>
+  <p>Enabled</p>
+  <% } else { %>
+  <p>Disabled</p>
+  <% } %>
+</div>
