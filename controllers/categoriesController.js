@@ -1,44 +1,93 @@
-let id = 0;
+const { body, validationResult } = require('express-validator');
+const handleValidationErrors = require('../utils/handleValidationErrors');
+const db = require('../db/queries');
 
-function createId() {
-  id = id + 1;
-  return id;
-}
+const validateCategory = [
+  body('name')
+    .trim()
+    .notEmpty()
+    .withMessage('Name is required.')
+    .isLength({ max: 100 })
+    .withMessage('Name must be under 100 characters.'),
+];
 
-const categories = [
-  {
-    id: createId(),
-    name: 'Peripherals',
-  },
-  {
-    id: createId(),
-    name: 'Desktops',
-  },
-  {
-    id: createId(),
-    name: 'Components',
+exports.getCategories = async (req, res) => {
+  const categories = await db.getAllCategories();
+
+  res.render('category/categoryList', {
+    title: 'Category List',
+    categories: categories,
+  });
+};
+
+exports.getCategoryDetails = async (req, res) => {
+  const id = req.params.id;
+  const category = await db.getCategory(id);
+
+  if (!category) res.render('404');
+
+  res.render('category/categoryDetails', {
+    title: 'Category Details',
+    category: category,
+  });
+};
+
+exports.getCreateCategoryForm = (req, res) => {
+  res.render('category/categoryCreate', {
+    title: 'Create Category',
+    category: {},
+  });
+};
+
+exports.categoryCreate = [
+  validateCategory,
+  handleValidationErrors('category/categoryCreate', (req) => ({
+    title: 'Create Category',
+    category: req.body,
+  })),
+  async (req, res) => {
+    const category = req.body;
+
+    await db.insertCategory(category);
+
+    res.redirect('/categories');
   },
 ];
 
-module.exports = {
-  getCategories: (req, res) => {
-    res.render('categoryList', {
-      title: 'Category List',
-      categories: categories,
-    });
+exports.getCategoryUpdateForm = async (req, res) => {
+  const id = req.params.id;
+  const category = await db.getCategory(id);
+
+  if (!category) return res.status(404).render('404');
+
+  res.render('category/categoryCreate', {
+    title: 'Update Category',
+    category: category,
+  });
+};
+
+exports.categoryUpdate = [
+  validateCategory,
+  handleValidationErrors('category/categoryCreate', (req) => ({
+    title: 'Update Category',
+    category: {
+      id: req.params.id,
+      ...req.body,
+    },
+  })),
+  async (req, res) => {
+    const id = req.params.id;
+    const updatedCategory = req.body;
+
+    await db.updateCategory(id, updatedCategory);
+
+    res.redirect('/categories');
   },
+];
 
-  getCategoryDetails: (req, res) => {
-    const categoryId = req.params.categoryId;
-    const category = categories.find(
-      (category) => String(category.id) === categoryId
-    );
+exports.categoryDelete = async (req, res) => {
+  const id = req.params.id;
+  await db.deleteCategory(id);
 
-    if (!category) res.render('404');
-
-    res.render('categoryDetails', {
-      title: 'Category Details',
-      category: category,
-    });
-  },
+  res.redirect('/categories');
 };

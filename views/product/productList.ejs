@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div>
+      <% products.forEach((product) => { %> <%- include('product',
+      {product:product}) %>
+      <form action="/products/<%= product.id %>/delete" method="POST">
+        <button
+          type="submit"
+          onclick="return confirm('Are you sure you want to delete this product?');">
+          Delete
+        </button>
+      </form>
+      <% }) %>
+    </div>
+  </body>
+</html>
