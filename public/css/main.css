@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --nav-bg-color: #023047;
+  --nav-text-color: #ffffff;
+  --body-bg-color: #caf0f8;
+  --body-text-color: #2e2e2e;
+
+  --primary-btn-color: #023047;
+  --primary-btn-hover-color: #02183f;
+  --edit-btn-color: #005741;
+  --edit-btn-hover-color: #0e362d;
+  --delete-btn-color: #8b0d0d;
+  --delete-btn-hover-color: #640a0a;
+
+  --row-even-color: #f8f9fa;
+  --row-odd-color: #e0f2f8;
+
+  --default-font-size: 16px;
+  --default-radius: 4px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--body-bg-color);
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  font-family: 'Roboto', sans-serif, system-ui;
+  font-size: var(--default-font-size);
+  color: var(--body-text-color);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+svg {
+  fill: var(--nav-text-color);
+  width: 25px;
+  height: auto;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 32px;
+  margin-top: 1em;
+  color: var(--body-text-color);
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--nav-text-color);
+  background-color: var(--nav-bg-color);
+  padding: 2em;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+.nav-links > a {
+  transition: color 0.2s ease;
+}
+
+.nav-links > a:hover {
+  color: rgb(202, 202, 202);
+}
+
+.navbar > a {
+  font-size: 32px;
+}
+
+.navbar a {
+  font-weight: bold;
+}
+
+/* Buttons */
+.btn {
+  cursor: pointer;
+  font-size: var(--default-font-size);
+  font-weight: bold;
+  background-color: var(--primary-btn-color);
+  color: var(--nav-text-color);
+  padding: 0.6em 1.2em;
+  border: 0;
+  border-radius: var(--default-radius);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.list-btn {
+  width: 25px;
+  height: 25px;
+  padding: 0.5em;
+}
+
+.btn:hover {
+  background-color: var(--primary-btn-hover-color);
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.edit {
+  width: fit-content;
+  background-color: var(--edit-btn-color);
+}
+
+.edit:hover {
+  background-color: var(--edit-btn-hover-color);
+}
+
+.delete {
+  width: fit-content;
+  background-color: var(--delete-btn-color);
+}
+
+.delete:hover {
+  background-color: var(--delete-btn-hover-color);
+}

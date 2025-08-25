@@ -1,0 +1,65 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5em;
+  width: 500px;
+  min-width: 300px;
+  background-color: var(--nav-text-color);
+  padding: 2em;
+  border-radius: var(--default-radius);
+}
+
+fieldset {
+  padding: 1em 0px 1em 0px;
+}
+
+legend {
+  text-align: center;
+}
+
+.form-group,
+fieldset {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
+
+.form-group > div {
+  width: 40%;
+}
+
+.form-control {
+  display: flex;
+  width: 300px;
+  max-width: 100%;
+  flex-direction: column;
+  text-align: left;
+  gap: 5px;
+}
+
+.radio {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+}
+
+label,
+legend {
+  font-weight: bold;
+}
+
+input,
+textarea,
+select {
+  max-width: 100%;
+  padding: 5px;
+}

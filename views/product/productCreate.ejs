@@ -3,59 +3,86 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/forms.css" />
     <title><%= title %></title>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <%- include("../partials/errors.ejs") %>
-    <form
-      method="POST"
-      action="<%= product.id ? `/products/${product.id}/update` : '/products/create' %>">
-      <label for="name">Name</label>
-      <input
-        type="text"
-        name="name"
-        id="name"
-        value="<%= product.name ? product.name : '' %>" />
+    <%- include("../partials/navbar.ejs") %>
+    <h1 class="page-title"><%= title %></h1>
+    <main>
+      <form
+        method="POST"
+        action="<%= product.id ? `/products/${product.id}/update` : '/products/create' %>">
+        <div class="form-control">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value="<%= product.name ? product.name : '' %>"
+            required />
+        </div>
 
-      <label for="description">Description</label>
-      <textarea name="description" id="description">
+        <div class="form-control">
+          <label for="description">Description</label>
+          <textarea name="description" id="description" required>
 <%= product.description ? product.description : '' %></textarea
-      >
+          >
+        </div>
 
-      <label for="stock-quantity">Stock Quantity</label>
-      <input
-        type="number"
-        name="stockQuantity"
-        id="stock-quantity"
-        min="0"
-        step="1"
-        value="<%= product.stockQuantity ? product.stockQuantity : '' %>" />
+        <div class="form-group">
+          <div class="form-control">
+            <label for="stock-quantity">Stock</label>
+            <input
+              type="number"
+              name="stockQuantity"
+              id="stock-quantity"
+              min="0"
+              step="1"
+              value="<%= product.stockQuantity >= 0 ? product.stockQuantity : '' %>"
+              required />
+          </div>
 
-      <label for="price">Price</label>
-      <input
-        type="number"
-        name="price"
-        id="price"
-        min="0"
-        step="0.01"
-        value="<%= product.price ? product.price : '' %>" />
+          <div class="form-control">
+            <label for="price">Price</label>
+            <input
+              type="number"
+              name="price"
+              id="price"
+              min="0"
+              step="0.01"
+              value="<%= product.price ? product.price : '' %>"
+              required />
+          </div>
+        </div>
 
-      <select name="categoryId" id="categoryId">
-        <% categories.forEach((category) => { %>
-        <option value="<%= category.id %>"><%= category.name %></option>
-        <% }) %>
-      </select>
+        <div class="form-control">
+          <label for="categoryId">Category</label>
+          <select name="categoryId" id="categoryId" required>
+            <% categories.forEach((category) => { %>
+            <option value="<%= category.id %>" <%= product.categoryId === category.id ? 'selected' : '' %>><%= category.name %></option>
+            <% }) %>
+          </select>
+        </div>
 
-      <label for="active">Active</label>
-      <input type="radio" name="isActive" id="active" value="true" checked <%=
-      product.isActive === true ? 'checked' : '' %> />
+        <fieldset>
+          <legend>Availability</legend>
+          <div class="radio">
+            <label for="active">Active</label>
+            <input type="radio" name="isActive" id="active" value="true" checked
+            <%= product.isActive === true ? 'checked' : '' %> />
+          </div>
 
-      <label for="inactive">Inactive</label>
-      <input type="radio" name="isActive" id="inactive" value="false" <%=
-      product.isActive === false ? 'checked' : '' %> />
+          <div class="radio">
+            <label for="inactive">Inactive</label>
+            <input type="radio" name="isActive" id="inactive" value="false" <%=
+            product.isActive === false ? 'checked' : '' %> />
+          </div>
+        </fieldset>
 
-      <button type="submit">Submit</button>
-    </form>
+        <button class="btn edit" type="submit">Submit</button>
+      </form>
+    </main>
   </body>
 </html>

@@ -3,9 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/index.css" />
     <title><%= title %></title>
   </head>
   <body>
-    <h1><%= title %></h1>
+    <%- include("partials/navbar.ejs") %>
+    <h1 class="page-title">Dashboard</h1>
+    <div class="home-container">
+      <div class="home-counters">
+        <h2>Product Counter: <%= productCount %></h2>
+        <h2>Category Counter: <%= categoryCount %></h2>
+      </div>
+
+      <a class="btn btn-home" href="/products">View Products</a>
+      <a class="btn btn-home" href="/categories">View Categories</a>
+    </div>
   </body>
 </html>

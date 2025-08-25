@@ -1,3 +1,8 @@
-<div>
-  <h3><%= category.name %></h3>
+<div class="item category">
+  <h3>
+    <a class="details-link" href="/categories/<%= category.id %>"
+      ><%= category.name %></a
+    >
+  </h3>
+  <%- include("../partials/categoryButtons.ejs") %>
 </div>

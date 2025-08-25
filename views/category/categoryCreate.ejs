@@ -3,21 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/forms.css" />
     <title><%= title %></title>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <%- include("../partials/errors.ejs") %>
-    <form
-      method="POST"
-      action="<%= category.id ? `/categories/${category.id}/update` : '/categories/create' %>">
-      <label for="name">Name</label>
-      <input
-        type="text"
-        name="name"
-        id="name"
-        value="<%= category.name ? category.name : '' %>" />
-      <button type="submit">Submit</button>
-    </form>
+    <%- include("../partials/navbar.ejs") %>
+    <h1 class="page-title"><%= title %></h1>
+
+    <main>
+      <form
+        method="POST"
+        action="<%= category.id ? `/categories/${category.id}/update` : '/categories/create' %>">
+        <div class="form-control">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value="<%= category.name ? category.name : '' %>"
+            required />
+        </div>
+
+        <button class="btn edit" type="submit">Submit</button>
+      </form>
+    </main>
   </body>
 </html>

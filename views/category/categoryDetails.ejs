@@ -3,9 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/details.css" />
     <title>Document</title>
   </head>
   <body>
-    <%- include('category', {category: category}) %>
+    <%- include("../partials/navbar.ejs") %>
+
+    <main>
+      <div class="item-container">
+        <div class="item-section">
+          <h3>Name:</h3>
+          <p><%= category.name %></p>
+        </div>
+        <%- include("../partials/categoryButtons.ejs") %>
+      </div>
+    </main>
   </body>
 </html>
