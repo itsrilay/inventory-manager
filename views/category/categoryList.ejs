@@ -1,26 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/lists.css" />
-    <title><%= title %></title>
-  </head>
-  <body>
-    <%- include("../partials/navbar.ejs") %>
-    <div class="page-header">
-      <h1 class="page-title"><%= title %></h1>
-      <a class="btn" href="/categories/create">Add Category</a>
+<div class="page-header">
+  <h1 class="page-title"><%= title %></h1>
+  <a class="btn" href="/categories/create">Add Category</a>
+</div>
+<main>
+  <div class="item-list">
+    <div class="item category">
+      <h3>Name</h3>
     </div>
-    <main>
-      <div class="item-list">
-        <div class="item category">
-          <h3>Name</h3>
-        </div>
-        <% categories.forEach((category) => { %> <%- include('category',
-        {category: category}) %> <% }) %>
-      </div>
-    </main>
-  </body>
-</html>
+    <% categories.forEach((category) => { %> <%- include('category', {category:
+    category}) %> <% }) %>
+  </div>
+</main>

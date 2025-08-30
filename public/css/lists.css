@@ -30,16 +30,6 @@ main {
   color: var(--nav-text-color);
 }
 
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 1em;
-}
-
-.btn-form > button {
-  height: 41px;
-}
-
 .details-link {
   text-decoration: underline;
 }

@@ -1,43 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/details.css" />
-    <title>Document</title>
-  </head>
-  <body>
-    <%- include("../partials/navbar.ejs") %>
-
-    <main>
-      <div class="item-container">
-        <div class="item-section">
-          <h3>Name:</h3>
-          <p><%= product.name %></p>
-        </div>
-        <div class="item-section">
-          <h3>Description:</h3>
-          <p><%= product.description %></p>
-        </div>
-        <div class="item-section">
-          <h3>Stock:</h3>
-          <p><%= product.stockQuantity %></p>
-        </div>
-        <div class="item-section">
-          <h3>Price:</h3>
-          <p><%= product.price %>€</p>
-        </div>
-        <div class="item-section">
-          <h3>Availability:</h3>
-          <% if(product.isActive) { %>
-          <p>Enabled</p>
-          <% } else { %>
-          <p>Disabled</p>
-          <% } %>
-        </div>
-        <%- include("../partials/productButtons.ejs") %>
-      </div>
-    </main>
-  </body>
-</html>
+<main>
+  <div class="item-container">
+    <div class="item-section">
+      <h3>Name:</h3>
+      <p><%= product.name %></p>
+    </div>
+    <div class="item-section">
+      <h3>Description:</h3>
+      <p><%= product.description %></p>
+    </div>
+    <div class="item-section">
+      <h3>Stock:</h3>
+      <p><%= product.stockQuantity %></p>
+    </div>
+    <div class="item-section">
+      <h3>Price:</h3>
+      <p><%= product.price %>€</p>
+    </div>
+    <div class="item-section">
+      <h3>Availability:</h3>
+      <% if(product.isActive) { %>
+      <p>Enabled</p>
+      <% } else { %>
+      <p>Disabled</p>
+      <% } %>
+    </div>
+    <%- include("../partials/productButtons.ejs") %>
+  </div>
+</main>

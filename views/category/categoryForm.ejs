@@ -1,0 +1,19 @@
+<h1 class="page-title"><%= title %></h1>
+
+<main>
+  <form
+    method="POST"
+    action="<%= category.id ? `/categories/${category.id}/update` : '/categories/create' %>">
+    <div class="form-control">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        value="<%= category.name ? category.name : '' %>"
+        required />
+    </div>
+
+    <button class="btn edit" type="submit">Submit</button>
+  </form>
+</main>

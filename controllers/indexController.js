@@ -8,5 +8,6 @@ exports.getIndex = async (req, res) => {
     title: 'Dashboard',
     productCount: products.length,
     categoryCount: categories.length,
+    stylesheet: 'index.css',
   });
 };

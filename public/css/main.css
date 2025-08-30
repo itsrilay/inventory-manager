@@ -93,6 +93,16 @@ svg {
 }
 
 /* Buttons */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+.btn-form > button {
+  height: 41px;
+}
+
 .btn {
   cursor: pointer;
   font-size: var(--default-font-size);
@@ -135,4 +145,32 @@ svg {
 
 .delete:hover {
   background-color: var(--delete-btn-hover-color);
+}
+
+.alert {
+  padding: 12px 20px;
+  margin: 10px auto;
+  width: 90%;
+  max-width: 700px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.alert-info {
+  background-color: #cce5ff;
+  color: #004085;
+  border: 1px solid #b8daff;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
 }

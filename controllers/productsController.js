@@ -1,6 +1,7 @@
 const { body } = require('express-validator');
 const handleValidationErrors = require('../utils/handleValidationErrors');
 const db = require('../db/queries');
+const isDemo = require('../utils/isDemo');
 
 const validateProduct = [
   body('name')
@@ -40,6 +41,7 @@ exports.getProducts = async (req, res) => {
   res.render('product/productList', {
     title: 'Product List',
     products: products,
+    stylesheet: 'lists.css',
   });
 };
 
@@ -47,35 +49,43 @@ exports.getProductDetails = async (req, res) => {
   const id = req.params.id;
   const product = await db.getProduct(id);
 
-  if (!product) res.status(404).render('404');
+  if (!product) res.status(404).render('404', { layout: false });
 
   res.render('product/productDetails', {
     title: 'Product Details',
     product: product,
+    stylesheet: 'details.css',
   });
 };
 
 exports.getProductCreateForm = async (req, res) => {
   const categories = await db.getAllCategories();
 
-  res.render('product/productCreate', {
+  res.render('product/productForm', {
     title: 'Create Product',
     product: {},
     categories: categories,
+    stylesheet: 'forms.css',
   });
 };
 
 exports.productCreate = [
   validateProduct,
-  handleValidationErrors('product/productCreate', (req) => ({
+  handleValidationErrors('product/productForm', (req) => ({
     title: 'Create Product',
     product: req.body,
   })),
   async (req, res) => {
     const product = req.body;
 
+    if (isDemo()) {
+      req.flash('info', 'Demo: Skipping action');
+      return res.redirect('/products');
+    }
+
     await db.insertProduct(product);
 
+    req.flash('success', 'Product created successfully.');
     res.redirect('/products');
   },
 ];
@@ -85,18 +95,19 @@ exports.getProductUpdateForm = async (req, res) => {
   const product = await db.getProduct(id);
   const categories = await db.getAllCategories();
 
-  if (!product) return res.status(404).render('404');
+  if (!product) return res.status(404).render('404', { layout: false });
 
-  res.render('product/productCreate', {
+  res.render('product/productForm', {
     title: 'Update Product',
     product: product,
     categories: categories,
+    stylesheet: 'forms.css',
   });
 };
 
 exports.productUpdate = [
   validateProduct,
-  handleValidationErrors('productCreate', (req) => ({
+  handleValidationErrors('productForm', (req) => ({
     title: 'Update Product',
     product: {
       id: req.params.id,
@@ -107,15 +118,28 @@ exports.productUpdate = [
     const id = req.params.id;
     const updatedProduct = req.body;
 
+    if (isDemo()) {
+      req.flash('info', 'Demo: Skipping action');
+      return res.redirect('/products');
+    }
+
     await db.updateProduct(id, updatedProduct);
 
+    req.flash('success', 'Product updated successfully.');
     res.redirect('/products');
   },
 ];
 
 exports.productDelete = async (req, res) => {
   const id = req.params.id;
+
+  if (isDemo()) {
+    req.flash('info', 'Demo: Skipping action');
+    return res.redirect('/products');
+  }
+
   await db.deleteProduct(id);
 
+  req.flash('success', 'Product deleted successfully.');
   res.redirect('/products');
 };
