@@ -104,12 +104,13 @@ exports.categoryUpdate = [
 
 exports.categoryDelete = async (req, res) => {
   const id = req.params.id;
-  await db.deleteCategory(id);
 
   if (isDemo()) {
     req.flash('info', 'Demo: Skipping action');
     return res.redirect('/categories');
   }
+
+  await db.deleteCategory(id);
 
   req.flash('success', 'Category deleted successfully.');
   res.redirect('/categories');
