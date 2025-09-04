@@ -150,8 +150,8 @@ This project is distributed under the MIT License - see [LICENSE][license-url] f
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/ruis2003
-[license-shield]: https://img.shields.io/github/license/itsrilay/cv-app.svg?style=for-the-badge
-[license-url]: https://github.com/itsrilay/cv-app/blob/master/LICENSE
+[license-shield]: https://img.shields.io/github/license/itsrilay/inventory-manager.svg?style=for-the-badge
+[license-url]: https://github.com/itsrilay/inventory-manager/blob/master/LICENSE
 [product-screenshot]: public/images/screenshot.png
 [Express.js]: https://img.shields.io/badge/express-%23f0f1f3?style=for-the-badge&logo=express&logoColor=%23383838
 [Express-url]: https://expressjs.com/
