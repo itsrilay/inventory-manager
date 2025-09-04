@@ -1,5 +1,11 @@
 <a id="readme-top"></a>
 
+<!-- PROJECT SHIELDS -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[![LinkedIn][linkedin-shield]][linkedin-url]
+[![project_license][license-shield]][license-url]
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -42,7 +48,7 @@
 
 ## Project Overview
 
-![Project Screen Shot](public/images/screenshot.png)
+![Project Screen Shot][product-screenshot]
 
 This is the homepage of the project, featuring a user-friendly interface. The page includes buttons that easily redirect you to the **Products** and **Categories** pages, where you can perform all CRUD operations to manage your inventory, such as adding, editing, and removing products and categories.
 
@@ -50,11 +56,11 @@ This is the homepage of the project, featuring a user-friendly interface. The pa
 
 ### Built With
 
-- [![Express](https://img.shields.io/badge/express-%23f0f1f3?style=for-the-badge&logo=express&logoColor=%23383838)](https://expressjs.com/)
-- [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-%23212121?style=for-the-badge&logo=postgresql&logoColor=%23336791)](https://www.postgresql.org/)
-- ![JavaScript](https://img.shields.io/badge/JavaScript-%23F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-- ![CSS](https://img.shields.io/badge/CSS-%23264DE4?style=for-the-badge&logo=css&logoColor=white)
-- ![HTML](https://img.shields.io/badge/HTML-%23E44D26?style=for-the-badge&logo=html5&logoColor=white)
+- [![Express][Express.js]][Express-url]
+- [![PostgreSQL][PostgreSQL]][PostgreSQL-url]
+- ![JavaScript][Javascript]
+- ![CSS][CSS]
+- ![HTML][HTML]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -138,3 +144,19 @@ Make sure you're ready for the installation process.
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/ruis2003
+[license-shield]: https://img.shields.io/github/license/itsrilay/cv-app.svg?style=for-the-badge
+[license-url]: https://github.com/itsrilay/cv-app/blob/master/LICENSE.txt
+[product-screenshot]: public/images/screenshot.png
+[Express.js]: https://img.shields.io/badge/express-%23f0f1f3?style=for-the-badge&logo=express&logoColor=%23383838
+[Express-url]: https://expressjs.com/
+[PostgreSQL]: https://img.shields.io/badge/PostgreSQL-%23212121?style=for-the-badge&logo=postgresql&logoColor=%23336791
+[PostgreSQL-url]: https://www.postgresql.org/
+[Javascript]: https://img.shields.io/badge/JavaScript-%23F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
+[CSS]: https://img.shields.io/badge/CSS-%23264DE4?style=for-the-badge&logo=css&logoColor=white
+[HTML]: https://img.shields.io/badge/HTML-%23E44D26?style=for-the-badge&logo=html5&logoColor=white
