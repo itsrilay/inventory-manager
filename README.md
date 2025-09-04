@@ -141,7 +141,7 @@ Make sure you're ready for the installation process.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is distributed under the MIT License - see [LICENSE][license-url] for more details.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -151,7 +151,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/ruis2003
 [license-shield]: https://img.shields.io/github/license/itsrilay/cv-app.svg?style=for-the-badge
-[license-url]: https://github.com/itsrilay/cv-app/blob/master/LICENSE.txt
+[license-url]: https://github.com/itsrilay/cv-app/blob/master/LICENSE
 [product-screenshot]: public/images/screenshot.png
 [Express.js]: https://img.shields.io/badge/express-%23f0f1f3?style=for-the-badge&logo=express&logoColor=%23383838
 [Express-url]: https://expressjs.com/
