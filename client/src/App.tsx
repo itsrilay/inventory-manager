@@ -13,8 +13,8 @@ function App() {
   return (
     <div className="app-container">
       <nav className="navbar">
+        <Link to="/" className='home link'>Inventory Manager</Link>
         <div className="nav-links">
-          <Link to="/" className="link">Dashboard</Link>
           <Link to="/products" className="link">Products</Link>
           <Link to="/categories" className="link">Categories</Link>
         </div>

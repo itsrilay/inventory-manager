@@ -84,6 +84,11 @@ svg {
   padding: 2em;
 }
 
+.navbar .home {
+  font-weight: bold;
+  font-size: 24px;
+}
+
 .nav-links {
   display: flex;
   justify-content: center;
