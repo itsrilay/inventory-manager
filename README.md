@@ -1,25 +1,23 @@
 <a id="readme-top"></a>
 
 <!-- PROJECT SHIELDS -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
 [![LinkedIn][linkedin-shield]][linkedin-url]
-[![project_license][license-shield]][license-url]
+[![MIT License][license-shield]][license-url]
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/itsrilay/inventory-manager">
-    <img src="./public/images/logo.svg" alt="Logo" width="80" height="80">
+    <img src="https://raw.githubusercontent.com/itsrilay/inventory-manager/main/public/images/logo.svg" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Inventory Manager</h3>
 
   <p align="center">
-    Inventory management system for an IT store, featuring product and category management.
+    A full-stack inventory management system built with a modern, decoupled architecture.
     <br />
     <br />
-    <a href="https://inventory-manager-mrto.onrender.com">View Demo</a>
+    <a href="https://inventory-manager-mrto.onrender.com">View Original Demo</a>
   </p>
 </div>
 
@@ -48,19 +46,24 @@
 
 ## Project Overview
 
-![Project Screen Shot][product-screenshot]
+![Project Screen Shot][project-screenshot]
 
-This is the homepage of the project, featuring a user-friendly interface. The page includes buttons that easily redirect you to the **Products** and **Categories** pages, where you can perform all CRUD operations to manage your inventory, such as adding, editing, and removing products and categories.
+The application is composed of two main parts:
+
+*   **Backend:** A RESTful API built with **Node.js**, **Express**, and **TypeScript**. It uses **Prisma** as an ORM to communicate with a **PostgreSQL** database.
+
+*   **Frontend:** A dynamic single-page application (SPA) built with **React** and **TypeScript**, bootstrapped with **Vite**. It uses **React Router** for client-side navigation.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
-- [![Express][Express.js]][Express-url]
-- [![PostgreSQL][PostgreSQL]][PostgreSQL-url]
-- ![JavaScript][Javascript]
-- ![CSS][CSS]
-- ![HTML][HTML]
+*   [![React][React.js]][React-url]
+*   [![Vite][Vite.js]][Vite-url]
+*   [![TypeScript][TypeScript.js]][TypeScript-url]
+*   [![Express][Express.js]][Express-url]
+*   [![Prisma][Prisma.io]][Prisma-url]
+*   [![PostgreSQL][PostgreSQL.org]][PostgreSQL-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -68,74 +71,74 @@ This is the homepage of the project, featuring a user-friendly interface. The pa
 
 ## Getting Started
 
-To get a local copy up and running follow these simple steps.
+To get a local copy up and running, follow these steps.
 
 ### Prerequisites
 
-Make sure you're ready for the installation process.
-
-- **npm**
-
-  ```sh
-  npm install npm@latest -g
-  ```
+*   Node.js (v18 or higher recommended)
+*   npm
+*   PostgreSQL
 
 ### Installation
 
-1. **Clone the repository**
-   ```sh
-   git clone https://github.com/itsrilay/inventory-manager
-   ```
-2. **Navigate to the local repository folder**
-   ```sh
-   cd inventory-manager
-   ```
-3. **Install NPM packages**  
-   Install the dependencies listed in `package.json`.
+1.  **Clone the repository**
+    ```sh
+    git clone https://github.com/itsrilay/inventory-manager.git
+    cd inventory-manager
+    ```
 
-   ```sh
-   npm install
-   ```
+2.  **Install Backend Dependencies**
+    ```sh
+    npm install
+    ```
 
-4. **Set up PostgreSQL database**  
-   You’ll need to have PostgreSQL installed on your machine. For installation instructions and downloads, visit the official [PostgreSQL website](https://www.postgresql.org/download/).
+3.  **Install Frontend Dependencies**
+    ```sh
+    npm install --prefix client
+    ```
 
-   Once installed, if you need setup instructions, I recommend [this resource](https://neon.com/postgresql/postgresql-getting-started) to help you get everything ready to go, no matter what your OS is.
+4.  **Set up PostgreSQL Database**
+    You will need a local PostgreSQL instance. Create a new user and database. For example, using `psql`:
+    ```sql
+    CREATE ROLE myuser WITH LOGIN PASSWORD 'mypassword';
+    CREATE DATABASE inventory_manager;
+    GRANT ALL PRIVILEGES ON DATABASE inventory_manager TO myuser;
+    ALTER SCHEMA public OWNER TO myuser;
+    ```
 
-5. **Set up environment variables**  
-   Create a `.env` file in the root directory of the project and add the following environment variables:
+5.  **Set up Environment Variables**
+    Create a `.env` file in the root of the project and add your environment variables:
+    ```env
+    # Database connection string
+    DATABASE_URL="postgresql://myuser:mypassword@localhost:5432/inventory_manager"
 
-   ```js
-   const PORT = 'ENTER YOUR PORT FOR THE EXPRESS APP'; // Optional, default is 3000
-   const CONNECTION_STRING =
-     'postgresql://[username]:[password]@[host]:[port][/db_name]'; // Basic connection string example
-   const DEMO_MODE = true / false; /// true - perform DB actions (e.g., add/update records); false - skip DB actions (safe for testing)
-   const SESSION_SECRET = 'SECRET KEY FOR express-session';
-   ```
+    # Port for the Express server (optional, defaults to 3000)
+    PORT=3000
 
-6. **Seed the PostgreSQL database**
+    # Demo mode to disable database writes (optional, defaults to false)
+    DEMO_MODE=false
+    ```
 
-   ```sh
-   node ./db/populatedb.js
-   ```
+6.  **Sync Database Schema**
+    This command reads your `prisma/schema.prisma` file and creates the necessary tables in your database.
+    ```sh
+    npx prisma db push
+    ```
 
-7. **(Optional) Change Git remote URL**  
-   If you're planning to make changes to the project but don't want to accidentally push to the original repository.
+7.  **Seed the Database (Optional)**
+    To populate the database with initial sample data, run the seed script:
+    ```sh
+    npm run seed
+    ```
 
-   ```sh
-   git remote set-url origin github_username/repo_name
-   git remote -v # confirm the changes
-   ```
+8.  **Start the Application**
+    This command will start both the backend API server and the frontend Vite development server concurrently.
+    ```sh
+    npm run dev:all
+    ```
 
-8. **Start the app**  
-   To start the app, run:
-
-   ```sh
-   node app.js
-   ```
-
-9. **Visit**  
-   Open a browser and go to `localhost:PORT`, replacing `PORT` with the actual port number you set in the `.env` file.
+9.  **Visit the Application**
+    Open a browser and navigate to the frontend URL provided by Vite (usually `http://localhost:5173`).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -146,17 +149,21 @@ This project is distributed under the MIT License - see [LICENSE][license-url] f
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/ruis2003
 [license-shield]: https://img.shields.io/github/license/itsrilay/inventory-manager.svg?style=for-the-badge
 [license-url]: https://github.com/itsrilay/inventory-manager/blob/master/LICENSE
-[product-screenshot]: public/images/screenshot.png
-[Express.js]: https://img.shields.io/badge/express-%23f0f1f3?style=for-the-badge&logo=express&logoColor=%23383838
+[project-screenshot]: public/images/screenshot-project.png
+
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://react.dev/
+[Vite.js]: https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E
+[Vite-url]: https://vitejs.dev/
+[TypeScript.js]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
+[TypeScript-url]: https://www.typescriptlang.org/
+[Express.js]: https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white
 [Express-url]: https://expressjs.com/
-[PostgreSQL]: https://img.shields.io/badge/PostgreSQL-%23212121?style=for-the-badge&logo=postgresql&logoColor=%23336791
+[Prisma.io]: https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white
+[Prisma-url]: https://www.prisma.io/
+[PostgreSQL.org]: https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white
 [PostgreSQL-url]: https://www.postgresql.org/
-[Javascript]: https://img.shields.io/badge/JavaScript-%23F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
-[CSS]: https://img.shields.io/badge/CSS-%23264DE4?style=for-the-badge&logo=css&logoColor=white
-[HTML]: https://img.shields.io/badge/HTML-%23E44D26?style=for-the-badge&logo=html5&logoColor=white
