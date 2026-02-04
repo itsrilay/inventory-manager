@@ -97,16 +97,28 @@ To get a local copy up and running, follow these steps.
     npm install --prefix client
     ```
 
-4.  **Set up PostgreSQL Database**
-    You will need a local PostgreSQL instance. Create a new user and database. For example, using `psql`:
+4.  **Generate Prisma Client**
+    This command creates the necessary Prisma Client files in `node_modules`.
+    ```sh
+    npx prisma generate
+    ```
+
+5.  **Set up PostgreSQL Database**
+    The following commands should be run as a PostgreSQL superuser (e.g., `postgres`).
     ```sql
+    -- 1. Create the user and database
     CREATE ROLE myuser WITH LOGIN PASSWORD 'mypassword';
     CREATE DATABASE inventory_manager;
-    GRANT ALL PRIVILEGES ON DATABASE inventory_manager TO myuser;
+
+    -- 2. Connect to the new database
+    \c inventory_manager
+
+    -- 3. Grant permissions and ownership to the new user
+    GRANT ALL ON SCHEMA public TO myuser;
     ALTER SCHEMA public OWNER TO myuser;
     ```
 
-5.  **Set up Environment Variables**
+6.  **Set up Environment Variables**
     Create a `.env` file in the root of the project and add your environment variables:
     ```env
     # Database connection string
@@ -119,25 +131,25 @@ To get a local copy up and running, follow these steps.
     DEMO_MODE=false
     ```
 
-6.  **Sync Database Schema**
+7.  **Sync Database Schema**
     This command reads your `prisma/schema.prisma` file and creates the necessary tables in your database.
     ```sh
     npx prisma db push
     ```
 
-7.  **Seed the Database (Optional)**
+8.  **Seed the Database (Optional)**
     To populate the database with initial sample data, run the seed script:
     ```sh
     npm run seed
     ```
 
-8.  **Start the Application**
+9.  **Start the Application**
     This command will start both the backend API server and the frontend Vite development server concurrently.
     ```sh
     npm run dev:all
     ```
 
-9.  **Visit the Application**
+10. **Visit the Application**
     Open a browser and navigate to the frontend URL provided by Vite (usually `http://localhost:5173`).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -153,7 +165,7 @@ This project is distributed under the MIT License - see [LICENSE][license-url] f
 [linkedin-url]: https://linkedin.com/in/ruis2003
 [license-shield]: https://img.shields.io/github/license/itsrilay/inventory-manager.svg?style=for-the-badge
 [license-url]: https://github.com/itsrilay/inventory-manager/blob/master/LICENSE
-[project-screenshot]: public/images/screenshot-project.png
+[product-screenshot]: public/images/screenshot-project.png
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://react.dev/
