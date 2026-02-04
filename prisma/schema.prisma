@@ -14,7 +14,7 @@ model Product {
   price           Float
   isActive        Boolean  @map("is_active")
   categoryId      Int?     @map("category_id")
-  category        Category? @relation(fields: [categoryId], references: [id])
+  category        Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
 }
 
 model Category {

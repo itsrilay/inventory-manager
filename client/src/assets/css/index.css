@@ -34,6 +34,19 @@ body {
   color: var(--body-text-color);
 }
 
+/* App Layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+main {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 1em;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -51,6 +64,7 @@ svg {
   justify-content: center;
   align-items: center;
   gap: 1em;
+  margin-bottom: 1em;
 }
 
 .page-title {
@@ -76,20 +90,13 @@ svg {
   gap: 1em;
 }
 
-.nav-links > a {
+.nav-links > .link {
   transition: color 0.2s ease;
-}
-
-.nav-links > a:hover {
-  color: rgb(202, 202, 202);
-}
-
-.navbar > a {
-  font-size: 32px;
-}
-
-.navbar a {
   font-weight: bold;
+}
+
+.nav-links > .link:hover {
+  color: rgb(202, 202, 202);
 }
 
 /* Buttons */
@@ -97,6 +104,7 @@ svg {
   display: flex;
   justify-content: center;
   gap: 1em;
+  margin-top: 1em;
 }
 
 .btn-form > button {

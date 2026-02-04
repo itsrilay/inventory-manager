@@ -30,7 +30,7 @@ export const getCategoryDetails = async (req: Request, res: Response) => {
 };
 
 export const categoryCreate = [
-  validateCategory,
+  ...validateCategory,
   handleValidationErrors('json', (req: Request) => ({
     category: req.body,
   })),

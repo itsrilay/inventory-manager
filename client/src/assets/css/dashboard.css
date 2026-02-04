@@ -1,37 +1,49 @@
-.home-container {
+.dashboard-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   padding: 2em 1em;
   gap: 4em;
 }
 
-.home-counters {
+.dashboard-counters {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  max-width: 600px;
   gap: 1em;
 }
 
-.home-counters h2 {
-  background-color: #ffffff;
+.counter-card {
+  background-color: var(--nav-text-color);
   padding: 1em 2em;
   border-radius: var(--default-radius);
   font-weight: 500;
+  width: 100%;
+  text-align: center;
 }
 
-.btn-home {
+.dashboard-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  max-width: 100%;
+  align-items: center;
+}
+
+.btn-dashboard {
   text-align: center;
   width: 100%;
-  max-width: 400px;
   font-size: 24px;
   font-weight: bold;
   padding: 1.5em;
   border-radius: var(--default-radius);
   background-color: var(--primary-btn-color);
+  color: var(--nav-text-color);
 }
 
-.btn-home:hover {
+.btn-dashboard:hover {
   background-color: var(--primary-btn-hover-color);
 }

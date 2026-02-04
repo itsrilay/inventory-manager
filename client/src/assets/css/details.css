@@ -1,0 +1,35 @@
+.details-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+.details-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2em;
+  padding: 2em;
+  background-color: var(--nav-text-color);
+  border-radius: var(--default-radius);
+  max-width: 800px;
+}
+
+.details-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.details-label {
+  font-weight: bold;
+}
+
+.details-value {
+  text-align: justify;
+}
+
+.btn-back {
+  max-width: fit-content;
+  margin-bottom: 1em;
+}

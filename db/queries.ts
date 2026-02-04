@@ -56,6 +56,9 @@ export async function getCategory(id: string) {
     where: {
       id: parseInt(id, 10),
     },
+    include: {
+      products: true, // This will include all products in this category
+    },
   });
 }
 
