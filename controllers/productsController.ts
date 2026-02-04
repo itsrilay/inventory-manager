@@ -1,7 +1,8 @@
-const { body } = require('express-validator');
-const handleValidationErrors = require('../utils/handleValidationErrors');
-const db = require('../db/queries');
-const isDemo = require('../utils/isDemo');
+import { body } from 'express-validator';
+import handleValidationErrors from '../utils/handleValidationErrors';
+import * as db from '../db/queries';
+import isDemo from '../utils/isDemo';
+import { Request, Response } from 'express';
 
 const validateProduct = [
   body('name')
@@ -36,7 +37,7 @@ const validateProduct = [
     .customSanitizer((value) => value === 'true'),
 ];
 
-exports.getProducts = async (req, res) => {
+export const getProducts = async (req: Request, res: Response) => {
   const products = await db.getAllProducts();
   res.render('product/productList', {
     title: 'Product List',
@@ -45,8 +46,8 @@ exports.getProducts = async (req, res) => {
   });
 };
 
-exports.getProductDetails = async (req, res) => {
-  const id = req.params.id;
+export const getProductDetails = async (req: Request, res: Response) => {
+  const id = req.params.id as string;
   const product = await db.getProduct(id);
 
   if (!product) res.status(404).render('404', { layout: false });
@@ -58,7 +59,7 @@ exports.getProductDetails = async (req, res) => {
   });
 };
 
-exports.getProductCreateForm = async (req, res) => {
+export const getProductCreateForm = async (req: Request, res: Response) => {
   const categories = await db.getAllCategories();
 
   res.render('product/productForm', {
@@ -69,29 +70,29 @@ exports.getProductCreateForm = async (req, res) => {
   });
 };
 
-exports.productCreate = [
+export const productCreate = [
   validateProduct,
-  handleValidationErrors('product/productForm', (req) => ({
+  handleValidationErrors('product/productForm', (req: Request) => ({
     title: 'Create Product',
     product: req.body,
   })),
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const product = req.body;
 
     if (isDemo()) {
-      req.flash('info', 'Demo: Skipping action');
+      // req.flash('info', 'Demo: Skipping action');
       return res.redirect('/products');
     }
 
     await db.insertProduct(product);
 
-    req.flash('success', 'Product created successfully.');
+    // req.flash('success', 'Product created successfully.');
     res.redirect('/products');
   },
 ];
 
-exports.getProductUpdateForm = async (req, res) => {
-  const id = req.params.id;
+export const getProductUpdateForm = async (req: Request, res: Response) => {
+  const id = req.params.id as string;
   const product = await db.getProduct(id);
   const categories = await db.getAllCategories();
 
@@ -105,41 +106,41 @@ exports.getProductUpdateForm = async (req, res) => {
   });
 };
 
-exports.productUpdate = [
-  validateProduct,
-  handleValidationErrors('productForm', (req) => ({
+export const productUpdate = [
+  ...validateProduct,
+  handleValidationErrors('productForm', (req: Request) => ({
     title: 'Update Product',
     product: {
       id: req.params.id,
       ...req.body,
     },
   })),
-  async (req, res) => {
-    const id = req.params.id;
+  async (req: Request, res: Response) => {
+    const id = req.params.id as string;
     const updatedProduct = req.body;
 
     if (isDemo()) {
-      req.flash('info', 'Demo: Skipping action');
+      // req.flash('info', 'Demo: Skipping action');
       return res.redirect('/products');
     }
 
     await db.updateProduct(id, updatedProduct);
 
-    req.flash('success', 'Product updated successfully.');
+    // req.flash('success', 'Product updated successfully.');
     res.redirect('/products');
   },
 ];
 
-exports.productDelete = async (req, res) => {
-  const id = req.params.id;
+export const productDelete = async (req: Request, res: Response) => {
+  const id = req.params.id as string;
 
   if (isDemo()) {
-    req.flash('info', 'Demo: Skipping action');
+    // req.flash('info', 'Demo: Skipping action');
     return res.redirect('/products');
   }
 
   await db.deleteProduct(id);
 
-  req.flash('success', 'Product deleted successfully.');
+  // req.flash('success', 'Product deleted successfully.');
   res.redirect('/products');
 };

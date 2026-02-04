@@ -1,0 +1,1 @@
+export default () => process.env.DEMO_MODE === 'true';

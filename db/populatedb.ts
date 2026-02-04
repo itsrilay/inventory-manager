@@ -1,5 +1,5 @@
-const { Client } = require('pg');
-require('dotenv').config();
+import { Client } from 'pg';
+import 'dotenv/config';
 
 const SQL = `
 -- Create tables

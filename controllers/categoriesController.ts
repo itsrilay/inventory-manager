@@ -1,7 +1,8 @@
-const { body, validationResult } = require('express-validator');
-const handleValidationErrors = require('../utils/handleValidationErrors');
-const db = require('../db/queries');
-const isDemo = require('../utils/isDemo');
+import { body } from 'express-validator';
+import handleValidationErrors from '../utils/handleValidationErrors';
+import * as db from '../db/queries';
+import isDemo from '../utils/isDemo';
+import { Request, Response } from 'express';
 
 const validateCategory = [
   body('name')
@@ -12,7 +13,7 @@ const validateCategory = [
     .withMessage('Name must be under 100 characters.'),
 ];
 
-exports.getCategories = async (req, res) => {
+export const getCategories = async (req: Request, res: Response) => {
   const categories = await db.getAllCategories();
 
   res.render('category/categoryList', {
@@ -22,8 +23,8 @@ exports.getCategories = async (req, res) => {
   });
 };
 
-exports.getCategoryDetails = async (req, res) => {
-  const id = req.params.id;
+export const getCategoryDetails = async (req: Request, res: Response) => {
+  const id = req.params.id as string;
   const category = await db.getCategory(id);
 
   if (!category) res.render('404', { layout: false });
@@ -35,7 +36,7 @@ exports.getCategoryDetails = async (req, res) => {
   });
 };
 
-exports.getCreateCategoryForm = (req, res) => {
+export const getCreateCategoryForm = (req: Request, res: Response) => {
   res.render('category/categoryForm', {
     title: 'Create Category',
     category: {},
@@ -43,29 +44,29 @@ exports.getCreateCategoryForm = (req, res) => {
   });
 };
 
-exports.categoryCreate = [
+export const categoryCreate = [
   validateCategory,
   handleValidationErrors('category/categoryForm', (req) => ({
     title: 'Create Category',
     category: req.body,
   })),
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const category = req.body;
 
     if (isDemo()) {
-      req.flash('info', 'Demo: Skipping action');
+      // req.flash('info', 'Demo: Skipping action');
       return res.redirect('/categories');
     }
 
     await db.insertCategory(category);
 
-    req.flash('success', 'Category created successfully.');
+    // req.flash('success', 'Category created successfully.');
     res.redirect('/categories');
   },
 ];
 
-exports.getCategoryUpdateForm = async (req, res) => {
-  const id = req.params.id;
+export const getCategoryUpdateForm = async (req: Request, res: Response) => {
+  const id = req.params.id as string;
   const category = await db.getCategory(id);
 
   if (!category) return res.status(404).render('404', { layout: false });
@@ -77,8 +78,8 @@ exports.getCategoryUpdateForm = async (req, res) => {
   });
 };
 
-exports.categoryUpdate = [
-  validateCategory,
+export const categoryUpdate = [
+  ...validateCategory,
   handleValidationErrors('category/categoryForm', (req) => ({
     title: 'Update Category',
     category: {
@@ -86,32 +87,32 @@ exports.categoryUpdate = [
       ...req.body,
     },
   })),
-  async (req, res) => {
-    const id = req.params.id;
+  async (req: Request, res: Response) => {
+    const id = req.params.id as string;
     const updatedCategory = req.body;
 
     if (isDemo()) {
-      req.flash('info', 'Demo: Skipping action');
+      // req.flash('info', 'Demo: Skipping action');
       return res.redirect('/categories');
     }
 
     await db.updateCategory(id, updatedCategory);
 
-    req.flash('success', 'Category updated successfully.');
+    // req.flash('success', 'Category updated successfully.');
     res.redirect('/categories');
   },
 ];
 
-exports.categoryDelete = async (req, res) => {
-  const id = req.params.id;
+export const categoryDelete = async (req: Request, res: Response) => {
+  const id = req.params.id as string;
 
   if (isDemo()) {
-    req.flash('info', 'Demo: Skipping action');
+    // req.flash('info', 'Demo: Skipping action');
     return res.redirect('/categories');
   }
 
   await db.deleteCategory(id);
 
-  req.flash('success', 'Category deleted successfully.');
+  // req.flash('success', 'Category deleted successfully.');
   res.redirect('/categories');
 };

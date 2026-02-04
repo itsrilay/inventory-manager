@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Product {
+  id              Int      @id @default(autoincrement())
+  name            String   @db.VarChar(100)
+  description     String?
+  stockQuantity   Int      @map("stock_quantity")
+  price           Float
+  isActive        Boolean  @map("is_active")
+  categoryId      Int?     @map("category_id")
+  category        Category? @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String    @db.VarChar(100)
+  products Product[]
+}

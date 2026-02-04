@@ -1,13 +1,12 @@
-const snakeToCamel = (str) =>
+const snakeToCamel = (str: string) =>
   str.replace(/_([a-z])/g, (g) => g[1].toUpperCase());
 
-const camelizeRow = (row) =>
+const camelizeRow = (row: any) =>
   Object.fromEntries(
     Object.entries(row).map(([key, val]) => [snakeToCamel(key), val])
   );
-const handleSnakeToCamel = (rows) => rows.map(camelizeRow);
+export const handleSnakeToCamel = (rows: any[]) => rows.map(camelizeRow);
 
-module.exports = {
-  handleSnakeToCamel,
+export {
   camelizeRow,
 };
