@@ -6,7 +6,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node app.ts",
     "dev:all": "concurrently \"npm run dev\" \"npm run dev --prefix client\"",
-    "seed": "ts-node --require dotenv/config db/populatedb.ts"
+    "seed": "ts-node --require dotenv/config db/populatedb.ts",
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "build:all": "npm install && cd client && npm install && npx vite build && cd .. && npx prisma generate && tsc"
   },
   "repository": {
     "type": "git",
