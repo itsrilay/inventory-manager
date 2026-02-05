@@ -17,7 +17,7 @@
     A full-stack inventory management system built with a modern, decoupled architecture.
     <br />
     <br />
-    <a href="https://inventory-manager-mrto.onrender.com">View Original Demo</a>
+    <a href="https://inventory-manager-5eqb.onrender.com">View Original Demo</a>
   </p>
 </div>
 
