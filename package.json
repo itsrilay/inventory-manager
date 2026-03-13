@@ -8,8 +8,8 @@
     "dev:all": "concurrently \"npm run dev\" \"npm run dev --prefix client\"",
     "seed": "ts-node --require dotenv/config db/populatedb.ts",
     "build": "tsc",
-    "start": "node dist/app.js",
-    "build:all": "npm install && cd client && npm install && npx vite build && cd .. && npx prisma generate && tsc"
+    "start": "npm run seed && node dist/app.js",
+    "build:all": "npm install && cd client && npm install && npx vite build && cd .. && npx prisma generate && npx prisma migrate deploy && tsc"
   },
   "repository": {
     "type": "git",

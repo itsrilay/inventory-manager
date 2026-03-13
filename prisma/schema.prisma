@@ -8,7 +8,7 @@ datasource db {
 
 model Product {
   id              Int      @id @default(autoincrement())
-  name            String   @db.VarChar(100)
+  name            String   @unique @db.VarChar(100)
   description     String?
   stockQuantity   Int      @map("stock_quantity")
   price           Float
@@ -19,6 +19,6 @@ model Product {
 
 model Category {
   id       Int       @id @default(autoincrement())
-  name     String    @db.VarChar(100)
+  name     String    @unique @db.VarChar(100)
   products Product[]
 }

@@ -104,25 +104,25 @@ To get a local copy up and running, follow these steps.
     ```
 
 5.  **Set up PostgreSQL Database**
-    The following commands should be run as a PostgreSQL superuser (e.g., `postgres`).
+    You will need to create a user, a main database, and a "shadow" database (which Prisma requires for safe migrations in development). Run these commands as a PostgreSQL superuser:
     ```sql
-    -- 1. Create the user and database
-    CREATE ROLE myuser WITH LOGIN PASSWORD 'mypassword';
-    CREATE DATABASE inventory_manager;
+    -- 1. Create the project user
+    CREATE USER myuser WITH PASSWORD 'mypassword';
 
-    -- 2. Connect to the new database
-    \c inventory_manager
+    -- 2. Create the main database and assign ownership
+    CREATE DATABASE inventory_manager OWNER myuser;
 
-    -- 3. Grant permissions and ownership to the new user
-    GRANT ALL ON SCHEMA public TO myuser;
-    ALTER SCHEMA public OWNER TO myuser;
+    -- 3. Create the shadow database and assign ownership
+    CREATE DATABASE inventory_manager_shadow OWNER myuser;
     ```
+    *(Note: If you are on Linux and encounter peer authentication errors, you can create these directly from your terminal using: `sudo -u postgres createdb -O myuser inventory_manager` and `sudo -u postgres createdb -O myuser inventory_manager_shadow`)*
 
 6.  **Set up Environment Variables**
-    Create a `.env` file in the root of the project and add your environment variables:
+    Create a `.env` file in the root of the project and add your environment variables. **Crucially, include the shadow database URL:**
     ```env
-    # Database connection string
+    # Database connection strings
     DATABASE_URL="postgresql://myuser:mypassword@localhost:5432/inventory_manager"
+    SHADOW_DATABASE_URL="postgresql://myuser:mypassword@localhost:5432/inventory_manager_shadow"
 
     # Port for the Express server (optional, defaults to 3000)
     PORT=3000
@@ -132,9 +132,9 @@ To get a local copy up and running, follow these steps.
     ```
 
 7.  **Sync Database Schema**
-    This command reads your `prisma/schema.prisma` file and creates the necessary tables in your database.
+    This applies existing migrations and ensures your local DB matches the repo history.
     ```sh
-    npx prisma db push
+    npx prisma migrate dev
     ```
 
 8.  **Seed the Database (Optional)**
